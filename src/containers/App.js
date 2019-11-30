@@ -7,6 +7,13 @@ import Footer from '../components/Footer';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+  
   render() {
     return (
       <Fragment>
