@@ -11,17 +11,19 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-
+      loading: true
     }
   }
   
   render() {
+    const { loading } = this.state;
+
     return (
       <Fragment>
       	<Logo />
       	<Navigation />
       	<Form />
-        <ImageLink />
+        <ImageLink loading = { loading } />
       	<Footer />
       </Fragment>
     );
