@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import { Input, Button } from 'antd';
 
-const ImageLink = ({ loading }) => {
+const ImageLinkInput = ({ onInputChange, loading }) => {
     const enterLoading = () => {
          // 
     }
@@ -18,6 +18,7 @@ const ImageLink = ({ loading }) => {
                     placeholder="input search text"
                     enterButton="Search"
                     size="large"
+                    onChange={onInputChange}
                     onSearch={value => console.log(value)}
                 />
                 <br />
@@ -32,4 +33,4 @@ const ImageLink = ({ loading }) => {
     )
 }
 
-export default ImageLink;
+export default ImageLinkInput;
