@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Clarifai from 'clarifai';
 
-import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
-import Form from '../components/Form';
 import ImageLinkInput from '../components/ImageLinkInput';
 import ReturnedImage from '../components/ReturnedImage';
 import Footer from '../components/Footer';
@@ -37,9 +35,7 @@ class App extends Component {
 
     return (
       <Fragment>
-      	<Logo />
       	<Navigation />
-      	<Form />
         <ImageLinkInput 
           handleSubmit = { this.handleSubmit }
           loading = { loading } 
