@@ -3,32 +3,28 @@ import 'antd/dist/antd.css';
 
 import { Input, Button } from 'antd';
 
-const ImageLinkInput = ({ onInputChange, loading }) => {
+const ImageLinkInput = ({ handleSubmit, loading }) => {
     const enterLoading = () => {
          // 
     }
 
     return (
         <Fragment>
-            <div> 
-                <p>Submit Your Image URL Below</p>
-            </div>
-            <div>
+            <p>Submit Your Image URL Below</p>
+            <form onSubmit={handleSubmit}>
                 <Input
                     placeholder="input search text"
-                    enterButton="Search"
                     size="large"
-                    onChange={onInputChange}
-                    onSearch={value => console.log(value)}
+                    type="text"
+                    small="true"
+                    allowClear
+                    /*onSearch={value => console.log(value)}*/
                 />
-                <br />
                 <Button 
-                    type="primary" 
-                    loading={ loading } 
-                    onClick={ enterLoading }>
+                    onClick={handleSubmit}>
                     Click me!
                 </Button>
-            </div>
+            </form>
         </Fragment>
     )
 }

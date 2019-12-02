@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 import Form from '../components/Form';
 import ImageLinkInput from '../components/ImageLinkInput';
+import ReturnedImage from '../components/ReturnedImage';
 import Footer from '../components/Footer';
 import './App.css';
 
@@ -21,11 +22,15 @@ class App extends Component {
     }
   }
 
-  onInputChange = (event) => {
-    console.log(event.target.value);
-  }
-
-  // onSubmit = ()
+  handleSubmit = () => {
+    app.models.predict(
+      Clarifai.FACE_DETECT_MODEL,
+      // "d1cf986c507b4100aa06b7fec7935329", 
+      "https://samples.clarifai.com/face-det.jpg")
+      .then(response => console.log(response.status.code))
+      // .then(response => console.log(response.json())) 
+      .catch(err => console.log(err))
+  } 
   
   render() {
     const { loading } = this.state;
@@ -36,9 +41,10 @@ class App extends Component {
       	<Navigation />
       	<Form />
         <ImageLinkInput 
-          onInputChange = { this.onInputChange }
+          handleSubmit = { this.handleSubmit }
           loading = { loading } 
         />
+        <ReturnedImage />
       	<Footer />
       </Fragment>
     );
