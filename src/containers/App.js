@@ -15,22 +15,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
+      // input: '',
       loading: true,
       imageUrl: ''
     }
   }
 
   handleSubmit = (event) => {
-    const { input, imageUrl } = this.state;
-    console.log('here: ' + event.target.value);
-    this.setState({imageUrl: input})
+    const {imageUrl} = this.state;
+    this.setState({imageUrl: event.target.value})
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL, "https://samples.clarifai.com/face-det.jpg")
       .then(response => {
         console.log(response.status.code)
       })
-      // .then(response => console.log(response.json())) 
       .catch(err => console.log(err))
   } 
   
