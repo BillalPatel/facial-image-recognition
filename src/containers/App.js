@@ -16,32 +16,36 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      loading: true
+      loading: true,
+      imageUrl: ''
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    const { input, imageUrl } = this.state;
+    console.log('here: ' + event.target.value);
+    this.setState({imageUrl: input})
     app.models.predict(
-      Clarifai.FACE_DETECT_MODEL,
-      // "d1cf986c507b4100aa06b7fec7935329", 
-      "https://samples.clarifai.com/face-det.jpg")
-      .then(response => console.log(response.status.code))
+      Clarifai.FACE_DETECT_MODEL, "https://samples.clarifai.com/face-det.jpg")
+      .then(response => {
+        console.log(response.status.code)
+      })
       // .then(response => console.log(response.json())) 
       .catch(err => console.log(err))
   } 
   
   render() {
-    const { loading } = this.state;
+    const { loading, imageUrl } = this.state;
 
     return (
       <Fragment>
       	<Navigation />
         <ImageLinkInput 
-          handleSubmit = { this.handleSubmit }
-          loading = { loading } 
+          handleSubmit = {this.handleSubmit}
+          loading = {loading} 
         />
-        <ReturnedImage />
-      	<Footer />
+        <ReturnedImage imageUrl = {imageUrl} />
+      	{/* <Footer /> */}
       </Fragment>
     );
   }
