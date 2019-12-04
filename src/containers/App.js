@@ -25,7 +25,7 @@ class App extends Component {
     const {imageUrl} = this.state;
     this.setState({imageUrl: event.target.value})
     app.models.predict(
-      Clarifai.FACE_DETECT_MODEL, "https://samples.clarifai.com/face-det.jpg")
+      Clarifai.FACE_DETECT_MODEL, imageUrl)
       .then(response => {
         console.log(response.status.code)
       })
