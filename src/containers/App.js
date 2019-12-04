@@ -19,6 +19,7 @@ class App extends Component {
       // input: '',
       loading: true,
       imageUrl: '',
+      toggleText: false,
       gender: '',
       age: ''
     }
@@ -34,7 +35,11 @@ class App extends Component {
       Clarifai.DEMOGRAPHICS_MODEL, 
       this.state.input)
       .then(response => {
-        this.setState({gender: response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name});
+        if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
+          this.setState({gender: 'female'})
+        } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'male') {
+          this.setState({gender: 'male'})
+        }
         this.setState({age: response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name});
       })
       .catch(err => console.log(err));
