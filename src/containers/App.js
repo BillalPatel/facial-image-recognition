@@ -3,6 +3,7 @@ import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
 import ImageLinkInput from '../components/ImageLinkInput';
+import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
 import Footer from '../components/Footer';
 import './App.css';
@@ -17,30 +18,43 @@ class App extends Component {
     this.state = {
       // input: '',
       loading: true,
-      imageUrl: ''
+      imageUrl: '',
+      gender: '',
+      age: ''
     }
+  }
+  
+  displayFaceBox = (box) => {
+    this.setState({box: box});
   }
 
   handleSubmit = (event) => {
-    const {imageUrl} = this.state;
-    this.setState({imageUrl: event.target.value})
+    this.setState({imageUrl: this.state.input});
     app.models.predict(
-      Clarifai.FACE_DETECT_MODEL, "https://samples.clarifai.com/face-det.jpg")
+      Clarifai.DEMOGRAPHICS_MODEL, 
+      this.state.input)
       .then(response => {
-        console.log(response.status.code)
+        this.setState({gender: response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name});
+        this.setState({age: response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name});
       })
-      .catch(err => console.log(err))
-  } 
+      .catch(err => console.log(err));
+  }
+
+  onInputChange = (event) => {
+    this.setState({input: event.target.value});
+  }
   
   render() {
-    const { loading, imageUrl } = this.state;
+    const { loading, imageUrl, gender, age } = this.state;
 
     return (
       <Fragment>
       	<Navigation />
+        <DemographicText gender = {gender} age = {age}/>
         <ImageLinkInput 
+          onInputChange={this.onInputChange}
           handleSubmit = {this.handleSubmit}
-          loading = {loading} 
+          // loading = {loading} 
         />
         <ReturnedImage imageUrl = {imageUrl} />
       	{/* <Footer /> */}
