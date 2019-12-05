@@ -16,16 +16,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      // input: '',
       loading: true,
       imageUrl: '',
+      showText: false,
       gender: '',
       age: ''
     }
-  }
-  
-  displayFaceBox = (box) => {
-    this.setState({box: box});
   }
 
   handleSubmit = (event) => {
@@ -34,8 +30,13 @@ class App extends Component {
       Clarifai.DEMOGRAPHICS_MODEL, 
       this.state.input)
       .then(response => {
-        this.setState({gender: response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name});
+        if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
+          this.setState({gender: 'female'})
+        } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'masculine') {
+          this.setState({gender: 'male'})
+        }
         this.setState({age: response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name});
+        this.setState({showText: true});
       })
       .catch(err => console.log(err));
   }
@@ -45,12 +46,18 @@ class App extends Component {
   }
   
   render() {
-    const { loading, imageUrl, gender, age } = this.state;
+    const { loading, imageUrl, showText, gender, age } = this.state;
+
+    const style = this.state.showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <Fragment>
       	<Navigation />
-        <DemographicText gender = {gender} age = {age}/>
+        <DemographicText 
+          style = {style}
+          gender = {gender} 
+          age = {age}
+        />
         <ImageLinkInput 
           onInputChange={this.onInputChange}
           handleSubmit = {this.handleSubmit}
