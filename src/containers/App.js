@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 import ImageLinkInput from '../components/ImageLinkInput';
 import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
-import Footer from '../components/Footer';
 import './App.css';
 
 const app = new Clarifai.App({
@@ -48,7 +47,7 @@ class App extends Component {
   render() {
     const { loading, imageUrl, showText, gender, age } = this.state;
 
-    const style = this.state.showText ? {visibility: 'visible'} : {visibility: 'hidden'};
+    const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <Fragment>
@@ -61,10 +60,11 @@ class App extends Component {
         <ImageLinkInput 
           onInputChange={this.onInputChange}
           handleSubmit = {this.handleSubmit}
-          // loading = {loading} 
         />
-        <ReturnedImage imageUrl = {imageUrl} />
-      	{/* <Footer /> */}
+        <ReturnedImage 
+          style = {style}
+          imageUrl = {imageUrl} 
+        />
       </Fragment>
     );
   }
