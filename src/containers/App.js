@@ -53,17 +53,17 @@ class App extends Component {
       <Fragment>
       	<Navigation />
         <DemographicText 
-          style = {style}
-          gender = {gender} 
-          age = {age}
+          style={style}
+          gender={gender} 
+          age={age}
         />
         <ImageLinkInput 
           onInputChange={this.onInputChange}
-          handleSubmit = {this.handleSubmit}
+          handleSubmit={this.handleSubmit}
         />
         <ReturnedImage 
-          style = {style}
-          imageUrl = {imageUrl} 
+          style={style}
+          imageUrl={imageUrl} 
         />
       </Fragment>
     );
