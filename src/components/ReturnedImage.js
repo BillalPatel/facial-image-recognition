@@ -7,8 +7,7 @@ const ReturnedImage = ({ imageUrl, style }) => {
                     className="center" 
                     id="inputimage" 
                     src={imageUrl} 
-                    alt="Recognised" 
-                    height='auto'
+                    alt="Recognised"
                 />
         </section>
     )
