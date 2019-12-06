@@ -15,7 +15,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loading: true,
       imageUrl: '',
       showText: false,
       gender: '',
@@ -23,7 +22,7 @@ class App extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     this.setState({imageUrl: this.state.input});
     app.models.predict(
       Clarifai.DEMOGRAPHICS_MODEL, 
@@ -45,7 +44,7 @@ class App extends Component {
   }
   
   render() {
-    const { loading, imageUrl, showText, gender, age } = this.state;
+    const { imageUrl, showText, gender, age } = this.state;
 
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
