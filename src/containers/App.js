@@ -19,7 +19,8 @@ class App extends Component {
       imageUrl: '',
       showText: false,
       gender: '',
-      age: ''
+      age: '',
+      route: 'landing'
     }
   }
 
@@ -44,28 +45,35 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
   
+  onRouteChange = () => {
+    this.setState({route: 'signin'})}
+  
   render() {
-    const { imageUrl, showText, gender, age } = this.state;
+    const { imageUrl, showText, gender, age, route } = this.state;
 
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <Fragment>
       	<Navigation />
-        <SignInForm />
-        <DemographicText 
-          style={style}
-          gender={gender} 
-          age={age}
-        />
-        <ImageLinkInput 
-          onInputChange={this.onInputChange}
-          handleSubmit={this.handleSubmit}
-        />
-        <ReturnedImage 
-          style={style}
-          imageUrl={imageUrl} 
-        />
+        { route === 'landing' 
+          ? <SignInForm onRouteChange={this.onRouteChange}/> :
+          <>
+            <DemographicText 
+              style={style}
+              gender={gender} 
+              age={age}
+            />
+            <ImageLinkInput 
+              onInputChange={this.onInputChange}
+              handleSubmit={this.handleSubmit}
+            />
+            <ReturnedImage 
+              style={style}
+              imageUrl={imageUrl} 
+            />
+          </>
+        }
       </Fragment>
     );
   }
