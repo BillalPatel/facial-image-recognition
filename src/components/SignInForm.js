@@ -20,7 +20,7 @@ const SignInForm = ({onRouteChange}) => {
             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
             type="submit" 
             value="Sign in"
-            onClick={onRouteChange}
+            onClick={() => onRouteChange('landing')}
           />
         </div>
         <div className="lh-copy mt3">

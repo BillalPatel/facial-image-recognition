@@ -20,7 +20,7 @@ class App extends Component {
       showText: false,
       gender: '',
       age: '',
-      route: 'landing'
+      route: 'signin'
     }
   }
 
@@ -45,8 +45,8 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
   
-  onRouteChange = () => {
-    this.setState({route: 'signin'})}
+  onRouteChange = (theRoute) => {
+    this.setState({route: theRoute})}
   
   render() {
     const { imageUrl, showText, gender, age, route } = this.state;
@@ -55,8 +55,8 @@ class App extends Component {
 
     return (
       <Fragment>
-      	<Navigation />
-        { route === 'landing' 
+      	<Navigation onRouteChange={this.onRouteChange}/>
+        { route === 'signin' 
           ? <SignInForm onRouteChange={this.onRouteChange}/> :
           <>
             <DemographicText 
