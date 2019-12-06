@@ -5,7 +5,7 @@ const DemographicText = ({ age, gender, style }) => {
         <Fragment>
             <header className="tc ph4" style={style}>
                 <h1 className="f3 f2-m f1-l fw2 black-90 mv3">
-                    You are a {gender} and your age is {age}
+                    You are a {gender} and your age is {age}.
                 </h1>
             </header>
         </Fragment>

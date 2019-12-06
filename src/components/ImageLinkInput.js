@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 
-const ImageLinkInput = ({ handleSubmit, onInputChange, loading }) => {
-    const enterLoading = () => {
-         // 
-    }
+const ImageLinkInput = ({ handleSubmit, onInputChange }) => {
 
     return (
         <Fragment>
