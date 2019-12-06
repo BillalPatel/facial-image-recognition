@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
+import SignInForm from '../components/SignInForm';
 import ImageLinkInput from '../components/ImageLinkInput';
 import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
@@ -18,7 +19,8 @@ class App extends Component {
       imageUrl: '',
       showText: false,
       gender: '',
-      age: ''
+      age: '',
+      route: 'signin'
     }
   }
 
@@ -43,27 +45,35 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
   
+  onRouteChange = (theRoute) => {
+    this.setState({route: theRoute})}
+  
   render() {
-    const { imageUrl, showText, gender, age } = this.state;
+    const { imageUrl, showText, gender, age, route } = this.state;
 
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <Fragment>
-      	<Navigation />
-        <DemographicText 
-          style={style}
-          gender={gender} 
-          age={age}
-        />
-        <ImageLinkInput 
-          onInputChange={this.onInputChange}
-          handleSubmit={this.handleSubmit}
-        />
-        <ReturnedImage 
-          style={style}
-          imageUrl={imageUrl} 
-        />
+      	<Navigation onRouteChange={this.onRouteChange}/>
+        { route === 'signin' 
+          ? <SignInForm onRouteChange={this.onRouteChange}/> :
+          <>
+            <DemographicText 
+              style={style}
+              gender={gender} 
+              age={age}
+            />
+            <ImageLinkInput 
+              onInputChange={this.onInputChange}
+              handleSubmit={this.handleSubmit}
+            />
+            <ReturnedImage 
+              style={style}
+              imageUrl={imageUrl} 
+            />
+          </>
+        }
       </Fragment>
     );
   }
