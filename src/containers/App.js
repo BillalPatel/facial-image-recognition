@@ -3,6 +3,7 @@ import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
 import SignInForm from '../components/SignInForm';
+import RegisterForm from '../components/RegisterForm';
 import ImageLinkInput from '../components/ImageLinkInput';
 import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
@@ -59,6 +60,7 @@ class App extends Component {
         { route === 'signin' 
           ? <SignInForm onRouteChange={this.onRouteChange}/> :
           <>
+          <RegisterForm onRouteChange={this.onRouteChange}/>
             <DemographicText 
               style={style}
               gender={gender} 
