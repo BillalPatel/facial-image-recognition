@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
+import SignInForm from '../components/SignInForm';
 import ImageLinkInput from '../components/ImageLinkInput';
 import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
@@ -51,6 +52,7 @@ class App extends Component {
     return (
       <Fragment>
       	<Navigation />
+        <SignInForm />
         <DemographicText 
           style={style}
           gender={gender} 
