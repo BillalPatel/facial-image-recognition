@@ -3,7 +3,7 @@ import React from 'react';
 const SignInForm = ({onRouteChange}) => {
   return (
     <main className="pa4 black-80">
-      <form className="measure center">
+      <div className="measure center">
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
           <legend className="f4 fw6 ph0 mh0">Sign In</legend>
           <div className="mt3">
@@ -24,14 +24,11 @@ const SignInForm = ({onRouteChange}) => {
           />
         </div>
         <div className="lh-copy mt3 hand">
-          <p 
-            className="f6 link dim black db"
-            onClick={() => onRouteChange('signup')}
-          >
+          <p lassName="f6 link dim black db" onClick={() => onRouteChange('signup')}>
             Sign up
           </p>
         </div>
-      </form>
+      </div>
     </main>
   )
 }
