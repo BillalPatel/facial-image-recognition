@@ -17,6 +17,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      signedIn: false,
       imageUrl: '',
       showText: false,
       gender: '',
@@ -47,16 +48,22 @@ class App extends Component {
   }
   
   onRouteChange = (theRoute) => {
-    this.setState({route: theRoute})}
+    if (theRoute === 'signout') {
+      this.setState({signedIn: false});
+    } else if (theRoute === 'landing') {
+      this.setState({signedIn: true});
+    }
+    this.setState({route: theRoute})
+  }
   
   render() {
-    const { imageUrl, showText, gender, age, route } = this.state;
+    const { signedIn, imageUrl, showText, gender, age, route } = this.state;
 
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <Fragment>
-      	<Navigation onRouteChange={this.onRouteChange}/>
+      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn}/>
         { route === 'landing' 
           ? 
           <>
