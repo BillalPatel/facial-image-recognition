@@ -57,24 +57,27 @@ class App extends Component {
     return (
       <Fragment>
       	<Navigation onRouteChange={this.onRouteChange}/>
-        { route === 'signin' 
-          ? <SignInForm onRouteChange={this.onRouteChange}/> :
+        { route === 'landing' 
+          ? 
           <>
-          <RegisterForm onRouteChange={this.onRouteChange}/>
             <DemographicText 
-              style={style}
-              gender={gender} 
-              age={age}
-            />
-            <ImageLinkInput 
-              onInputChange={this.onInputChange}
-              handleSubmit={this.handleSubmit}
-            />
-            <ReturnedImage 
-              style={style}
-              imageUrl={imageUrl} 
+                style={style}
+                gender={gender} 
+                age={age}
+              />
+              <ImageLinkInput 
+                onInputChange={this.onInputChange}
+                handleSubmit={this.handleSubmit}
+              />
+              <ReturnedImage 
+                style={style}
+                imageUrl={imageUrl} 
             />
           </>
+          : (route === 'signin' ?
+            <SignInForm onRouteChange={this.onRouteChange}/>
+            : <RegisterForm onRouteChange={this.onRouteChange}/>
+          ) 
         }
       </Fragment>
     );
