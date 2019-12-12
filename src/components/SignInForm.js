@@ -28,6 +28,7 @@ class SignInForm extends React.Component {
     })
     .then(res => {
       if (res.status === 200) {
+        this.props.setUserName();
         this.props.onRouteChange('landing');
       }
     })

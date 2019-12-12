@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
@@ -74,27 +75,22 @@ class App extends Component {
     this.setState({route: theRoute})
   }
 
-  getUserName() {
-    let userN;
-    fetch('http://localhost:5000/users')
+  setUserName = () => {
+    axios.get('http://localhost:5000/users')
       .then(res => {
-        console.log(res.json().data);
-        userN = res.json().data[0].name
         this.setState({
-          userName: userN
+          userName: res.data[0].name
         })
       })
-      return userN;
   }
 
   render() {
     const { signedIn, userName, imageUrl, showText, gender, age, route } = this.state;
-
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <>
-      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn} name={this.getUserName}/>
+      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn} name={userName}/>
         { route === 'landing' 
           ? 
           <>
@@ -113,7 +109,7 @@ class App extends Component {
             />
           </>
           : (route === 'signin' 
-          ? <SignInForm onRouteChange={this.onRouteChange}/>
+          ? <SignInForm onRouteChange={this.onRouteChange} setUserName={this.setUserName}/>
           : <RegisterForm createUser={this.createUser} onRouteChange={this.onRouteChange}/>
           )
         }
