@@ -18,6 +18,13 @@ class App extends Component {
     super();
     this.state = {
       signedIn: false,
+      userName: '',
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        joined: ''
+      },
       imageUrl: '',
       showText: false,
       gender: '',
@@ -43,6 +50,17 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  createUser = (userData) => {
+    this.setState({
+      user: {
+          id: userData.id,
+          name: userData.name,
+          email: userData.email,
+          joined: userData.joined
+      }
+    })
+  }
+
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
@@ -55,15 +73,28 @@ class App extends Component {
     }
     this.setState({route: theRoute})
   }
-  
+
+  getUserName() {
+    let userN;
+    fetch('http://localhost:5000/users')
+      .then(res => {
+        console.log(res.json().data);
+        userN = res.json().data[0].name
+        this.setState({
+          userName: userN
+        })
+      })
+      return userN;
+  }
+
   render() {
-    const { signedIn, imageUrl, showText, gender, age, route } = this.state;
+    const { signedIn, userName, imageUrl, showText, gender, age, route } = this.state;
 
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <>
-      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn}/>
+      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn} name={this.getUserName}/>
         { route === 'landing' 
           ? 
           <>
@@ -83,7 +114,7 @@ class App extends Component {
           </>
           : (route === 'signin' 
           ? <SignInForm onRouteChange={this.onRouteChange}/>
-          : <RegisterForm onRouteChange={this.onRouteChange}/>
+          : <RegisterForm createUser={this.createUser} onRouteChange={this.onRouteChange}/>
           )
         }
       </>
