@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
@@ -18,6 +19,13 @@ class App extends Component {
     super();
     this.state = {
       signedIn: false,
+      userName: '',
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        joined: ''
+      },
       imageUrl: '',
       showText: false,
       gender: '',
@@ -43,6 +51,17 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  createUser = (userData) => {
+    this.setState({
+      user: {
+          id: userData.id,
+          name: userData.name,
+          email: userData.email,
+          joined: userData.joined
+      }
+    })
+  }
+
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
@@ -55,15 +74,23 @@ class App extends Component {
     }
     this.setState({route: theRoute})
   }
-  
-  render() {
-    const { signedIn, imageUrl, showText, gender, age, route } = this.state;
 
+  setUserName = () => {
+    axios.get('http://localhost:5000/users')
+      .then(res => {
+        this.setState({
+          userName: res.data[0].name
+        })
+      })
+  }
+
+  render() {
+    const { signedIn, userName, imageUrl, showText, gender, age, route } = this.state;
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <>
-      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn}/>
+      	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn} name={userName}/>
         { route === 'landing' 
           ? 
           <>
@@ -82,8 +109,8 @@ class App extends Component {
             />
           </>
           : (route === 'signin' 
-          ? <SignInForm onRouteChange={this.onRouteChange}/>
-          : <RegisterForm onRouteChange={this.onRouteChange}/>
+          ? <SignInForm onRouteChange={this.onRouteChange} setUserName={this.setUserName}/>
+          : <RegisterForm createUser={this.createUser} onRouteChange={this.onRouteChange}/>
           )
         }
       </>
