@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
@@ -62,12 +62,12 @@ class App extends Component {
     const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
-      <Fragment>
+      <>
       	<Navigation onRouteChange={this.onRouteChange} signedIn={signedIn}/>
         { route === 'landing' 
           ? 
           <>
-            <DemographicText 
+            <DemographicText
                 style={style}
                 gender={gender} 
                 age={age}
@@ -81,12 +81,12 @@ class App extends Component {
                 imageUrl={imageUrl} 
             />
           </>
-          : (route === 'signin' ?
-            <SignInForm onRouteChange={this.onRouteChange}/>
-            : <RegisterForm onRouteChange={this.onRouteChange}/>
-          ) 
+          : (route === 'signin' 
+          ? <SignInForm onRouteChange={this.onRouteChange}/>
+          : <RegisterForm onRouteChange={this.onRouteChange}/>
+          )
         }
-      </Fragment>
+      </>
     );
   }
 }
