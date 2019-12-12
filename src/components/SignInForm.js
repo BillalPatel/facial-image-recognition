@@ -18,7 +18,19 @@ class SignInForm extends React.Component {
   }
 
   onSubmitSignIn = () => {
-
+    fetch('http://localhost:5000/signin', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword
+      })
+    })
+    .then(res => {
+      if (res.status === 200) {
+        this.props.onRouteChange('landing');
+      }
+    })
   }
   
   render() {
@@ -53,7 +65,7 @@ class SignInForm extends React.Component {
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
               type="submit" 
               value="Sign in"
-              onClick={() => onRouteChange('landing')}
+              onClick={this.onSubmitSignIn}
             />
           </div>
           <div className="lh-copy mt3 hand">
