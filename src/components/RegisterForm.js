@@ -23,22 +23,19 @@ class RegisterForm extends React.Component {
     }
 
     onSubmitRegistration = () => {
+        const { name, email } = this.state;
         fetch('http://localhost:5000/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password
+                name: name,
+                email: email
             })
         })
-        .then(res => res.json())
-        .then(user => {
-            if (user) {
-                this.props.createUser(user);
-                this.props.onRouteChange('landing');
-            }
-        })
+        .then(() => {
+            this.props.setUserName(name);
+            this.props.onRouteChange('landing');
+        });
     }
     
     render() {
