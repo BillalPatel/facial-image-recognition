@@ -33,9 +33,11 @@ class RegisterForm extends React.Component {
                 password: password
             })
         })
-        .then(() => {
-            this.props.setUserName(name);
-            this.props.onRouteChange('landing');
+        .then(res => {
+            if (res.status === 200) {
+                this.props.setUserName(name);
+                this.props.onRouteChange('landing');
+            }
         });
     }
     

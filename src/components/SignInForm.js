@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class SignInForm extends React.Component {
   constructor(props) {
@@ -18,18 +19,29 @@ class SignInForm extends React.Component {
   }
 
   onSubmitSignIn = () => {
+    const {signInEmail, signInPassword} = this.state;
     fetch('http://localhost:5000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword
+        email: signInEmail,
+        password: signInPassword
       })
     })
+    .then(res => res.json())
+    .then(user => {
+      if (user.id) {
+        this.props.onRouteChange('landing');
+      }
+    });
+    this.setName(signInEmail);
+  }
+
+  setName = (signInEmail) => {
+    axios.get(`http://localhost:5000/profile/${signInEmail}`)
     .then(res => {
       if (res.status === 200) {
-        this.props.setUserName();
-        this.props.onRouteChange('landing');
+        this.props.setUserName(res.data);
       }
     })
   }
