@@ -84,7 +84,7 @@ class App extends Component {
               />
               <ReturnedImage 
                 style={style}
-                imageUrl={imageUrl} 
+                imageUrl={imageUrl}
             />
           </>
           : (route === 'signin' 
