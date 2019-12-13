@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
@@ -20,12 +19,6 @@ class App extends Component {
     this.state = {
       signedIn: false,
       userName: '',
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        joined: ''
-      },
       imageUrl: '',
       showText: false,
       gender: '',
@@ -51,17 +44,6 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  createUser = (userData) => {
-    this.setState({
-      user: {
-          id: userData.id,
-          name: userData.name,
-          email: userData.email,
-          joined: userData.joined
-      }
-    })
-  }
-
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
@@ -75,13 +57,10 @@ class App extends Component {
     this.setState({route: theRoute})
   }
 
-  setUserName = () => {
-    axios.get('http://localhost:5000/users')
-      .then(res => {
-        this.setState({
-          userName: res.data[0].name
-        })
-      })
+  setUserName = (name) => {
+    this.setState({
+      userName: name
+    })
   }
 
   render() {
@@ -109,8 +88,8 @@ class App extends Component {
             />
           </>
           : (route === 'signin' 
-          ? <SignInForm onRouteChange={this.onRouteChange} setUserName={this.setUserName}/>
-          : <RegisterForm createUser={this.createUser} onRouteChange={this.onRouteChange}/>
+          ? <SignInForm setUserName={this.setUserName} onRouteChange={this.onRouteChange}/>
+          : <RegisterForm setUserName={this.setUserName} onRouteChange={this.onRouteChange}/>
           )
         }
       </>
