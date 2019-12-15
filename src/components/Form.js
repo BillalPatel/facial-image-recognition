@@ -37,16 +37,22 @@ class Form extends React.Component {
                                     onChange={this.props.passwordChange}
                                 />
                             </div>
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Confirm Password</label>
-                                <input 
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                    type="password" 
-                                    name="password"
-                                    id="confirm-password"
-                                    onChange={this.onPasswordChange}
-                                />
-                            </div>
+                            {   this.props.confirmPassword === true 
+                                ?
+                                <>
+                                    <div className="mt3"></div>
+                                    <label className="db fw6 lh-copy f6" htmlFor="password">Confirm Password</label>
+                                    <input 
+                                        className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                        type="password" 
+                                        name="password"
+                                        id="confirm-password"
+                                        onChange={this.onPasswordChange}
+                                    />
+                                </>
+                                :                                 
+                                <div></div>
+                            }
                         </div>
                     </fieldset>
                     <div>
@@ -54,9 +60,20 @@ class Form extends React.Component {
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
                             value={this.props.buttonName}
-                            onClick={this.props.clickRegister}
+                            onClick={this.props.clickButton}
                         />
                     </div>
+                    {   this.props.displaySignUpLink === true
+                        ?
+                        <div className="lh-copy mt3 hand">
+                            <p className="f6 link dim black db" onClick={this.props.submitSignUp}>
+                                Sign up
+                            </p>
+                        </div>
+                        :
+                        <>
+                        </>
+                    }
                 </div>
             </main>
         )

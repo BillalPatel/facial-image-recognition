@@ -49,7 +49,9 @@ class RegisterForm extends React.Component {
                 nameChange={this.onNameChange} 
                 emailChange={this.onEmailChange} 
                 passwordChange={this.onEmailChange}
+                confirmPassword={true}
                 buttonName={'Register!'}
+                displaySignUpLink={false}
                 clickRegister={this.onSubmitRegistration} 
             />
         )
