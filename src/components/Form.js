@@ -7,16 +7,21 @@ class Form extends React.Component {
                 <div className="measure center">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f4 fw6 ph0 mh0">{this.props.formName}</legend>
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                            <input 
-                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                type="email"
-                                name="firstname"
-                                id="firstname"
-                                onChange={this.props.nameChange}
-                            />
-                        </div>
+                        {   this.props.displayNameField === true
+                            ? 
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
+                                <input 
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="email"
+                                    name="firstname"
+                                    id="firstname"
+                                    onChange={this.props.nameChange}
+                                />
+                            </div>
+                            :
+                            <></>
+                        }
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email Address</label>
                             <input 
@@ -51,7 +56,7 @@ class Form extends React.Component {
                                     />
                                 </>
                                 :                                 
-                                <div></div>
+                                <></>
                             }
                         </div>
                     </fieldset>
@@ -71,8 +76,7 @@ class Form extends React.Component {
                             </p>
                         </div>
                         :
-                        <>
-                        </>
+                        <></>
                     }
                 </div>
             </main>

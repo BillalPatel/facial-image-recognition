@@ -46,13 +46,14 @@ class RegisterForm extends React.Component {
         return ( 
             <Form
                 formName={'Register'}
+                displayNameField={true}
                 nameChange={this.onNameChange} 
                 emailChange={this.onEmailChange} 
-                passwordChange={this.onEmailChange}
+                passwordChange={this.onPasswordChange}
                 confirmPassword={true}
                 buttonName={'Register!'}
+                clickButton={this.onSubmitRegistration}
                 displaySignUpLink={false}
-                clickRegister={this.onSubmitRegistration} 
             />
         )
     }

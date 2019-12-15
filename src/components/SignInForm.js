@@ -55,16 +55,16 @@ class SignInForm extends React.Component {
         return (
             <Form 
                 formName={'Sign In'}
+                displayNameField={false}
                 nameChange={this.onNameChange} 
                 emailChange={this.onEmailChange} 
-                passwordChange={this.onEmailChange}
+                passwordChange={this.onPasswordChange}
                 confirmPassword={false}
                 buttonName={'Sign In'}
                 clickButton={this.onSubmitSignIn} 
                 showSignUpLink={false}
                 displaySignUpLink={true}
                 submitSignUp={this.clickSignUp}
-
             />
         )
     }
