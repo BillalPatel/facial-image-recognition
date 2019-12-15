@@ -34,7 +34,8 @@ class SignInForm extends React.Component {
           if (user.id) {
               this.props.onRouteChange('landing');
           }
-      });
+      })
+      .catch(err => console.log(err));
       this.setName(signInEmail);
     }
 
