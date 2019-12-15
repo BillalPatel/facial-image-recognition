@@ -1,16 +1,12 @@
 import React from 'react';
 
 class Form extends React.Component {
-    constructor() {
-        super();
-    }
-
     render() { 
         return (
             <main className="pa4 black-80">
                 <div className="measure center">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                        <legend className="f4 fw6 ph0 mh0">Register</legend>
+                        <legend className="f4 fw6 ph0 mh0">{this.props.formName}</legend>
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
                             <input 
@@ -57,7 +53,7 @@ class Form extends React.Component {
                         <input 
                             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                             type="submit" 
-                            value="Register"
+                            value={this.props.buttonName}
                             onClick={this.props.clickRegister}
                         />
                     </div>
