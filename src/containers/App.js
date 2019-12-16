@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
 
 import Navigation from '../components/Navigation';
 import SignInForm from '../components/SignInForm';
@@ -9,9 +8,9 @@ import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
 import './App.css';
 
-const app = new Clarifai.App({
-  apiKey: 'd1cf986c507b4100aa06b7fec7935329'
-});
+// const app = new Clarifai.App({
+//   apiKey: 'd1cf986c507b4100aa06b7fec7935329'
+// });
 
 class App extends Component {
   constructor() {
@@ -29,18 +28,26 @@ class App extends Component {
 
   handleSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    app.models.predict(
-      Clarifai.DEMOGRAPHICS_MODEL, 
-      this.state.input)
-      .then(response => {
-        if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
-          this.setState({gender: 'female'})
-        } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'masculine') {
-          this.setState({gender: 'male'})
-        }
-        this.setState({age: response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name});
-        this.setState({showText: true});
-      })
+    // app.models.predict(
+    //   Clarifai.DEMOGRAPHICS_MODEL, 
+    //   this.state.input)
+    fetch('http://localhost:5000/analyseImage', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                input: this.state.input
+            })
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
+              this.setState({gender: 'female'})
+            } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'masculine') {
+              this.setState({gender: 'male'})
+            }
+            this.setState({age: response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name});
+            this.setState({showText: true});
+        })
       .catch(err => console.log(err));
   }
 
