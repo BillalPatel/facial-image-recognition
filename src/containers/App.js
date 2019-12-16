@@ -8,10 +8,6 @@ import DemographicText from '../components/DemographicText';
 import ReturnedImage from '../components/ReturnedImage';
 import './App.css';
 
-// const app = new Clarifai.App({
-//   apiKey: 'd1cf986c507b4100aa06b7fec7935329'
-// });
-
 class App extends Component {
   constructor() {
     super();
@@ -28,9 +24,6 @@ class App extends Component {
 
   handleSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    // app.models.predict(
-    //   Clarifai.DEMOGRAPHICS_MODEL, 
-    //   this.state.input)
     fetch('http://localhost:5000/analyseImage', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
