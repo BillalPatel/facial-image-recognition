@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 
 import Navigation from '../components/Navigation';
 import SignInForm from '../components/SignInForm';
@@ -17,38 +17,33 @@ const App = () => {
   const [age, setAge] = useState('');
   const [route, setRoute] = useState('signin');
 
-  // const signIn = () => setSignedIn(true);
-  const updateUserName = () => setUserName('');
-  // const setImageUrl = () => imageUrl(url);
-  // const setShowText = () => showText();
-  // const setGender = () => gender(type);
-  // const setAge = () => age();
-  // const setRoute = () => route();
+  const [input, setInput] = useState('');
 
   const handleSubmit = () => {
-    // setImageUrl({imageUrl: this.state.input})
+    setImageUrl(imageUrl);
     fetch('http://localhost:5000/analyseImage', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                // input: input
-            })
-        })
-        .then(res => res.json())
-        .then(response => {
-            if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
-              {setGender('female')}
-            } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'masculine') {
-              {setGender('male')}
-            }
-            {setAge(response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name)};
-            {showText(true)}
-        })
-      .catch(err => console.log(err));
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+          // input: setInput
+          input: input
+      })
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'feminine') {
+        setGender('female')
+      } else if (response.outputs[0].data.regions[0].data.face.gender_appearance.concepts[0].name === 'masculine') {
+        setGender('male')
+      }
+      setAge(response.outputs[0].data.regions[0].data.face.age_appearance.concepts[0].name);
+      setShowText(true)
+      })
+    .catch(err => console.log(err));
   }
 
   const onInputChange = (event) => {
-    this.setState({input: event.target.value});
+    setInput(event.target.value);
   }
   
   const onRouteChange = (theRoute) => {
@@ -57,40 +52,38 @@ const App = () => {
     } else if (theRoute === 'landing') {
       setSignedIn(true);
     }
-      {setRoute(theRoute)};
+      setRoute(theRoute);
   }
 
-  // render() {
-    const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
+  const style = showText ? {visibility: 'visible'} : {visibility: 'hidden'};
 
-    return (
-      <>
-      	<Navigation onRouteChange={onRouteChange} signedIn={setSignedIn} name={userName}/>
-        { route === 'landing' 
-          ? 
-          <>
-            <DemographicText
-                style={style}
-                gender={gender} 
-                age={age}
-              />
-              <ImageLinkInput 
-                onInputChange={onInputChange}
-                handleSubmit={handleSubmit}
-              />
-              <ReturnedImage 
-                style={style}
-                imageUrl={imageUrl}
-            />
-          </>
-          : (route === 'signin' 
-          ? <SignInForm setUserName={updateUserName} onRouteChange={onRouteChange}/>
-          : <RegisterForm setUserName={updateUserName} onRouteChange={onRouteChange}/>
-          )
-        }
-      </>
-    );
-  // }
+  return (
+    <>
+      <Navigation onRouteChange={onRouteChange} signedIn={signedIn} name={userName}/>
+      { route === 'landing' 
+        ? 
+        <>
+          <DemographicText
+            style={style}
+            gender={gender} 
+            age={age}
+          />
+          <ImageLinkInput 
+            onInputChange={onInputChange}
+            handleSubmit={handleSubmit}
+          />
+          <ReturnedImage 
+            style={style}
+            imageUrl={imageUrl}
+          />
+        </>
+        : (route === 'signin' 
+        ? <SignInForm setUserName={setUserName} onRouteChange={onRouteChange}/>
+        : <RegisterForm setUserName={setUserName} onRouteChange={onRouteChange}/>
+        )
+      }
+    </>
+  );
 }
 
 export default App;
