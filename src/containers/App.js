@@ -20,7 +20,7 @@ const App = () => {
   const [input, setInput] = useState('');
 
   const handleSubmit = () => {
-    setImageUrl(imageUrl);
+    setImageUrl(input);
     fetch('http://localhost:5000/analyseImage', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -48,7 +48,7 @@ const App = () => {
   
   const onRouteChange = (theRoute) => {
     if (theRoute === 'signout') {
-      setSignedIn(true);
+      setSignedIn(false);
     } else if (theRoute === 'landing') {
       setSignedIn(true);
     }
