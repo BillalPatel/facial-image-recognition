@@ -1,74 +1,68 @@
-import React from 'react';
-import Form from './Form';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Form from './Form';
 
-class SignInForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            signInEmail: '',
-            signInPassword: ''
+const SignInForm = (props) => {
+  const [ signInEmail, setSignInEmail ] = useState('');
+  const [ signInPassword, setSignInPassword ] = useState('');
+
+  const { setUserName, onRouteChange } = props;
+
+  const onEmailChange = (event) => {
+    setSignInEmail(event.target.value);
+  };
+
+  const onPasswordChange = (event) => {
+    setSignInPassword(event.target.value);
+  };
+
+  const onSubmitSignIn = () => {
+    fetch('http://localhost:5000/signin', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword
+      })
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        if (user.id) {
+          onRouteChange('landing');
         }
-    }
-  
-    onEmailChange = (event) => {
-      this.setState({signInEmail: event.target.value});
-    }
-
-    onPasswordChange = (event) => {
-      this.setState({signInPassword: event.target.value})
-    }
-
-    onSubmitSignIn = () => {
-      const {signInEmail, signInPassword} = this.state;
-      fetch('http://localhost:5000/signin', {
-          method: 'post',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-              email: signInEmail,
-              password: signInPassword
-          })
       })
-      .then(res => res.json())
-      .then(user => {
-          if (user.id) {
-              this.props.onRouteChange('landing');
-          }
-      })
-      .catch(err => console.log(err));
-      this.setName(signInEmail);
-    }
+      .catch((err) => console.log(err));
+    setName(signInEmail);
+  };
 
-    setName = (signInEmail) => {
-        axios.get(`http://localhost:5000/profile/${signInEmail}`)
-        .then(res => {
-            if (res.status === 200) {
-                this.props.setUserName(res.data);
-            }
-        })
-    }
+  const setName = (signInEmail) => {
+    axios.get(`http://localhost:5000/profile/${signInEmail}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setUserName(res.data);
+        }
+      });
+  };
 
-    clickSignUp = () => {
-        this.props.onRouteChange('signup');
-    }
-    
-    render() {
-        return (
-            <Form 
-                formName={'Sign In'}
-                displayNameField={false}
-                nameChange={this.onNameChange} 
-                emailChange={this.onEmailChange} 
-                passwordChange={this.onPasswordChange}
-                confirmPassword={false}
-                buttonName={'Sign In'}
-                clickButton={this.onSubmitSignIn} 
-                showSignUpLink={false}
-                displaySignUpLink={true}
-                submitSignUp={this.clickSignUp}
-            />
-        )
-    }
-}
+  const clickSignUp = () => {
+    onRouteChange('signup');
+  };
+
+  return (
+    <Form
+      formName="Sign In"
+      displayNameField={false}
+      // nameChange={onNameChange}
+      emailChange={onEmailChange}
+      passwordChange={onPasswordChange}
+      confirmPassword={false}
+      buttonName="Sign In"
+      clickButton={onSubmitSignIn}
+      showSignUpLink={false}
+      displaySignUpLink
+      submitSignUp={clickSignUp}
+    />
+  );
+};
 
 export default SignInForm;
