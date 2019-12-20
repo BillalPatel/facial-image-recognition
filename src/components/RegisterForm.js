@@ -1,30 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from './Form';
 
-class RegisterForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            password: ''
-        }
-    }
+const RegisterForm = (props) => {
+    const [ name, setName ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
 
-    onNameChange = (event) => {
-        this.setState({name: event.target.value})
+    const {
+        setUserName, onRouteChange
+      } = props;
+
+
+    const onNameChange = (event) => {
+        setName(event.target.value);
     }
     
-    onEmailChange = (event) => {
-        this.setState({email: event.target.value})
+    const onEmailChange = (event) => {
+        setEmail(event.target.value);
     }
     
-    onPasswordChange = (event) => {
-        this.setState({password: event.target.value})
+    const onPasswordChange = (event) => {
+        setPassword(event.target.value);
     }
 
-    onSubmitRegistration = () => {
-        const { name, email, password } = this.state;
+    const onSubmitRegistration = () => {
         fetch('http://localhost:5000/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -36,27 +35,25 @@ class RegisterForm extends React.Component {
         })
         .then(res => {
             if (res.status === 200) {
-                this.props.setUserName(name);
-                this.props.onRouteChange('landing');
+                setUserName(name);
+                onRouteChange('landing');
             }
         });
     }
     
-    render() {
-        return ( 
-            <Form
-                formName={'Register'}
-                displayNameField={true}
-                nameChange={this.onNameChange} 
-                emailChange={this.onEmailChange} 
-                passwordChange={this.onPasswordChange}
-                confirmPassword={true}
-                buttonName={'Register!'}
-                clickButton={this.onSubmitRegistration}
-                displaySignUpLink={false}
-            />
-        )
-    }
+    return ( 
+        <Form
+            formName={'Register'}
+            displayNameField={true}
+            nameChange={onNameChange} 
+            emailChange={onEmailChange} 
+            passwordChange={onPasswordChange}
+            confirmPassword={true}
+            buttonName={'Register!'}
+            clickButton={onSubmitRegistration}
+            displaySignUpLink={false}
+        />
+    )
 }
 
 export default RegisterForm;
