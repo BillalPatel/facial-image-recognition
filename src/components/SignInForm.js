@@ -16,6 +16,15 @@ const SignInForm = (props) => {
     setSignInPassword(event.target.value);
   };
 
+  const setName = (signInEmail) => {
+    axios.get(`http://localhost:5000/profile/${signInEmail}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setUserName(res.data);
+        }
+      });
+  };
+
   const onSubmitSignIn = () => {
     fetch('http://localhost:5000/signin', {
       method: 'post',
@@ -33,15 +42,6 @@ const SignInForm = (props) => {
       })
       .catch((err) => console.log(err));
     setName(signInEmail);
-  };
-
-  const setName = (signInEmail) => {
-    axios.get(`http://localhost:5000/profile/${signInEmail}`)
-      .then((res) => {
-        if (res.status === 200) {
-          setUserName(res.data);
-        }
-      });
   };
 
   const clickSignUp = () => {
