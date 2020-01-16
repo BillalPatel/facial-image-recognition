@@ -1,3 +1,5 @@
+import React from 'react';
+
 const DemographicText = ({ age, gender, style }) => (
   <>
     <header className="tc ph4" style={style}>

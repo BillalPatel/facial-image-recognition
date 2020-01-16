@@ -10,9 +10,9 @@ const ImageLinkInput = () => {
   const [age, setAge] = useState('');
   const [input, setInput] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setImageUrl(input);
-    fetch('http://localhost:5000/analyseImage', {
+    await fetch('http://localhost:5000/analyseImage', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

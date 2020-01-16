@@ -3,8 +3,8 @@ import axios from 'axios';
 import Form from './Form';
 
 const SignInForm = (props) => {
-  const [ signInEmail, setSignInEmail ] = useState('');
-  const [ signInPassword, setSignInPassword ] = useState('');
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
 
   const { setUserName, onRouteChange } = props;
 
@@ -16,8 +16,8 @@ const SignInForm = (props) => {
     setSignInPassword(event.target.value);
   };
 
-  const setName = (signInEmail) => {
-    axios.get(`http://localhost:5000/profile/${signInEmail}`)
+  const setName = async (signInEmail) => {
+    await axios.get(`http://localhost:5000/profile/${signInEmail}`)
       .then((res) => {
         if (res.status === 200) {
           setUserName(res.data);
@@ -52,7 +52,6 @@ const SignInForm = (props) => {
     <Form
       formName="Sign In"
       displayNameField={false}
-      // nameChange={onNameChange}
       emailChange={onEmailChange}
       passwordChange={onPasswordChange}
       confirmPassword={false}
