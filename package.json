@@ -5,6 +5,8 @@
   "dependencies": {
     "antd": "^3.26.0",
     "axios": "^0.19.0",
+    "babel-jest": "^24.9.0",
+    "babel-polyfill": "^6.26.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
@@ -20,7 +22,36 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-  "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "setupFiles": [
+      "raf/polyfill",
+      "./jest-helpers/jest-setup.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.(png)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|scss|serverscss|jpg|jpeg|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|inserted|insertedpng)$": "identity-obj-proxy",
+      "worker-loader!.*": "<rootDir>/src/__mocks__/workerMock.js"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 62,
+        "functions": 70,
+        "lines": 71,
+        "statements": 67
+      }
+    },
+    "globals": {
+      "RELEASE_VERSION": "TEST_RELEASE_VERSION"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
