@@ -1,5 +1,5 @@
 module.exports = {
-  setupFiles: ['<rootDir>/src/scripts/SetupEnzyme.js'],
+  setupFiles: ['<rootDir>/src/jest-setup.js'],
   moduleNameMapper: {
     '.+\\.(png|jpg|css|svg)$': 'identity-obj-proxy'
   }
