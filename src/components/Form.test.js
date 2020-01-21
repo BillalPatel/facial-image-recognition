@@ -28,6 +28,7 @@ describe('Sign in form', () => {
   });
 
   it('should render correctly as a registration form', () => {
+
     const props = {
       displaySignUpLink: false,
       buttonName: 'Register!'
@@ -35,6 +36,7 @@ describe('Sign in form', () => {
 
     const formWrapper = shallow(<Form {...props} />);
 
+    expect(spy).toHaveBeenCalled();
     expect(formWrapper.find('#name').exists()).toEqual(true);
     expect(formWrapper.find('#email-address').exists()).toEqual(true);
     expect(formWrapper.find('#password').exists()).toEqual(true);
