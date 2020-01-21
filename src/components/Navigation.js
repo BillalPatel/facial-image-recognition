@@ -48,14 +48,14 @@ const Navigation = ({ onRouteChange, signedIn, name }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-						API Reference
+            API Reference
           </a>
           <p
             className="link dim white f6 f5-l dib hand"
             title="Sign out"
             onClick={() => onRouteChange('signout')}
           >
-			Sign Out
+            Sign Out
           </p>
         </div>
       </nav>

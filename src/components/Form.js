@@ -67,6 +67,7 @@ const Form = (props) => {
         <div>
           <input
             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+            id="submit-button"
             type="submit"
             value={buttonName}
             onClick={clickButton}
@@ -75,8 +76,8 @@ const Form = (props) => {
         { displaySignUpLink === true
           ? (
             <div className="lh-copy mt3 hand">
-              <p className="f6 link dim black db" onClick={submitSignUp}>
-                            Sign up
+              <p className="f6 link dim black db" id="signup-link" onClick={submitSignUp}>
+                Sign up
               </p>
             </div>
           )
