@@ -12,20 +12,19 @@ const Form = (props) => {
       <div className="measure center">
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
           <legend className="f4 fw6 ph0 mh0">{formName}</legend>
-          { displayNameField === true
-            ? (
-              <div className="mt3">
-                <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                <input
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                  type="email"
-                  name="firstname"
-                  id="firstname"
-                  onChange={nameChange}
-                />
-              </div>
-            )
-            : <></>}
+          { displayNameField
+          && (
+          <div className="mt3">
+            <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
+            <input
+              className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+              type="email"
+              name="firstname"
+              id="firstname"
+              onChange={nameChange}
+            />
+          </div>
+          )}
           <div className="mt3">
             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email Address</label>
             <input
@@ -47,8 +46,8 @@ const Form = (props) => {
                 onChange={passwordChange}
               />
             </div>
-            { confirmPassword === true
-              ? (
+            { confirmPassword
+              && (
                 <>
                   <div className="mt3" />
                   <label className="db fw6 lh-copy f6" htmlFor="password">Confirm Password</label>
@@ -60,8 +59,7 @@ const Form = (props) => {
                     onChange={onPasswordChange}
                   />
                 </>
-              )
-              : <></>}
+              )}
           </div>
         </fieldset>
         <div>
@@ -73,15 +71,14 @@ const Form = (props) => {
             onClick={clickButton}
           />
         </div>
-        { displaySignUpLink === true
-          ? (
-            <div className="lh-copy mt3 hand">
-              <p className="f6 link dim black db" id="signup-link" onClick={submitSignUp}>
-                Sign up
-              </p>
-            </div>
-          )
-          : <></>}
+        { displaySignUpLink
+         && (
+         <div className="lh-copy mt3 hand">
+           <p className="f6 link dim black db" id="signup-link" onClick={submitSignUp}>
+            Sign up
+           </p>
+         </div>
+         )}
       </div>
     </main>
   );
