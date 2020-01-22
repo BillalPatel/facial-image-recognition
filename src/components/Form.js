@@ -11,7 +11,7 @@ const Form = (props) => {
     <main className="pa4 black-80">
       <div className="measure center">
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-          <legend className="f4 fw6 ph0 mh0">{formName}</legend>
+          <legend className="f4 fw6 ph0 mh0" id="form-title">{formName}</legend>
           { displayNameField
           && (
           <div className="mt3">
