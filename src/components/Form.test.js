@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { shallow, mount, render } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Form from './Form';
 
@@ -12,12 +12,12 @@ describe('Sign in form', () => {
   });
 
   it('should render correctly as a login form', () => {
-    const props = {
+    const loginFormProps = {
       displaySignUpLink: true,
       buttonName: 'Log in'
     };
 
-    const formWrapper = shallow(<Form {...props} />);
+    const formWrapper = shallow(<Form {...loginFormProps} />);
 
     expect(formWrapper.find('#name').exists()).toEqual(false);
     expect(formWrapper.find('#email-address').exists()).toEqual(true);
@@ -28,20 +28,27 @@ describe('Sign in form', () => {
   });
 
   it('should render correctly as a registration form', () => {
-
-    const props = {
-      displaySignUpLink: false,
-      buttonName: 'Register!'
+    const registerFormProps = {
+      formName: 'Register',
+      displayNameField: true,
+      // nameChange: onNameChange,
+      // emailChange: onEmailChange,
+      // passwordChange:{onPasswordChange},
+      confirmPassword: true,
+      buttonName: 'Register!',
+      // clickButton:{onSubmitRegistration}
+      displaySignUpLink: false
     };
 
-    const formWrapper = shallow(<Form {...props} />);
+    const formWrapper = mount(<Form {...registerFormProps} />);
 
-    expect(spy).toHaveBeenCalled();
-    expect(formWrapper.find('#name').exists()).toEqual(true);
+    expect(formWrapper.find('#form-title').text()).toEqual('Register');
+    expect(formWrapper.find('#firstname').exists()).toEqual(true);
     expect(formWrapper.find('#email-address').exists()).toEqual(true);
     expect(formWrapper.find('#password').exists()).toEqual(true);
     expect(formWrapper.find('#confirm-password').exists()).toEqual(true);
     expect(formWrapper.find('#submit-button').prop('value')).toEqual('Register!');
+    expect(formWrapper.find('#signup-link').exists()).toEqual(false);
     expect(formWrapper.find('#signup-link').exists()).toEqual(false);
   });
 });
