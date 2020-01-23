@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import Navigation from '../components/Navigation';
-import SignInForm from '../components/SignInForm';
-import RegisterForm from '../components/RegisterForm';
-import ImageLinkInput from '../components/ImageLinkInput';
+import Navigation from '../components/shared/Navigation';
+import SignInForm from '../components/Form/SignInForm';
+import RegisterForm from '../components/Form/RegisterForm';
+import ImageLinkInput from '../components/FaceDetection/ImageLinkInput';
 import './App.css';
 
 const App = () => {
