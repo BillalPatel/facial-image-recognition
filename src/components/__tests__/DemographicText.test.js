@@ -2,15 +2,15 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 
-import DemographicText from './DemographicText';
+import DemographicText from '../FaceDetection/DemographicText';
 
-describe('', () => {
+describe('Demographic Text', () => {
   it('should render', () => {
     const wrapper = mount(<DemographicText />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render', () => {
+  it('should take props and display correctly', () => {
     const props = {
       gender: 'male',
       age: '50'

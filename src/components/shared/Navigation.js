@@ -37,7 +37,7 @@ const Navigation = ({ onRouteChange, signedIn, name }) => {
             fill="#e0734a"
           />
         </svg>
-        <h2 className="mt2 mb0 f3 fw4 ttu tracked" title="username">
+        <h2 className="mt2 mb0 f3 fw4 ttu tracked" id="nav-user-name" title="username">
           {`Hello ${name}`}
         </h2>
         <div className="db dtc-l v-mid w-100 w-75-l tc tr-l">
@@ -61,6 +61,7 @@ const Navigation = ({ onRouteChange, signedIn, name }) => {
       </nav>
     );
   }
+
   return (
     <nav className="db dt-l w-100 border-box pa3 ph5-l">
       <svg
@@ -101,7 +102,7 @@ const Navigation = ({ onRouteChange, signedIn, name }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-						API Reference
+          API Reference
         </a>
       </div>
     </nav>

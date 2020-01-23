@@ -2,7 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import { shallow, mount } from 'enzyme';
 
-import Form from './Form';
+import Form from '../Form/Form';
 
 describe('Sign in form', () => {
   it('should render', () => {
