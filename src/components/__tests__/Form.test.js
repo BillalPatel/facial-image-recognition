@@ -30,12 +30,8 @@ describe('Sign in form', () => {
     const registerFormProps = {
       formName: 'Register',
       displayNameField: true,
-      // nameChange: onNameChange,
-      // emailChange: onEmailChange,
-      // passwordChange:{onPasswordChange},
       confirmPassword: true,
       buttonName: 'Register!',
-      // clickButton:{onSubmitRegistration}
       displaySignUpLink: false
     };
 
