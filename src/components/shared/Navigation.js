@@ -52,6 +52,7 @@ const Navigation = ({ onRouteChange, signedIn, name }) => {
           </a>
           <p
             className="link dim white f6 f5-l dib hand"
+            id="signout-link"
             title="Sign out"
             onClick={() => onRouteChange('signout')}
           >
