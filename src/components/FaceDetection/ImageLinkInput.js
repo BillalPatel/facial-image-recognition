@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ReturnedImage from './ReturnedImage';
 import DemographicText from './DemographicText';
-import LoadingAlert from './LoadingAlert';
+import LoadingAlert from '../shared/LoadingAlert';
 
 const ImageLinkInput = () => {
   const [imageUrl, setImageUrl] = useState('');
