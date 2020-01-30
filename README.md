@@ -7,3 +7,5 @@ yarn
 yarn run start
 ```
 ![](README_GIF.gif)
+
+#### More info about the machine learning library that has been used: https://www.clarifai.com/custom-face-recognition
