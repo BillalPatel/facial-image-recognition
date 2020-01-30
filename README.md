@@ -1,6 +1,9 @@
-## Facial Recognition App
+## Facial Recogntion App
+Provides the frontend in ReactJS for a facial recognition application. Backend can be found [here](https://github.com/BillalPatel/facial-image-recognition-api)
 
-In the project directory, you can run:
-
-### `yarn start`
-### `yarn test`
+#### Usage
+```javascript
+yarn
+yarn run start
+```
+![](README_GIF.gif)
