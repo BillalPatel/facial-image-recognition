@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import Particles from 'react-particles-js';
 
 import Navigation from '../components/shared/Navigation';
 import SignInForm from '../components/Form/SignInForm';
 import RegisterForm from '../components/Form/RegisterForm';
 import ImageLinkInput from '../components/FaceDetection/ImageLinkInput';
+import particlesParameters from './particlesjs-config.json';
 import './App.css';
 
 const App = () => {
@@ -22,6 +24,10 @@ const App = () => {
 
   return (
     <>
+      <Particles
+        className="particles"
+        params={particlesParameters}
+      />
       <Navigation onRouteChange={onRouteChange} signedIn={signedIn} name={userName} />
       { route === 'landing'
         ? (
