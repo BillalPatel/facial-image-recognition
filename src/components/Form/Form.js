@@ -4,7 +4,7 @@ const Form = (props) => {
   const {
     formName, displayNameField, nameChange, emailChange,
     buttonName, clickButton, passwordChange, confirmPassword,
-    onPasswordChange, displaySignUpLink, submitSignUp
+    onPasswordChange, displaySignUpLink, displaySignInLink, changeToSignUpForm, changeToSignInForm
   } = props;
 
   return (
@@ -74,8 +74,16 @@ const Form = (props) => {
         { displaySignUpLink
          && (
          <div className="lh-copy mt3 hand">
-           <p className="f6 link dim black db" id="signup-link" onClick={submitSignUp}>
-            Sign up
+           <p className="f6 link dim black db" id="signup-link" onClick={changeToSignUpForm}>
+             Sign up
+           </p>
+         </div>
+         )}
+        { displaySignInLink
+         && (
+         <div className="lh-copy mt3 hand">
+           <p className="f6 link dim black db" id="signin-link" onClick={changeToSignInForm}>
+             Sign in instead
            </p>
          </div>
          )}
