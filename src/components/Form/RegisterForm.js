@@ -41,6 +41,10 @@ const RegisterForm = (props) => {
       });
   };
 
+  const clickSignIn = () => {
+    onRouteChange('signin');
+  };
+
   return (
     <Form
       formName="Register"
@@ -51,7 +55,9 @@ const RegisterForm = (props) => {
       confirmPassword
       buttonName="Register!"
       clickButton={onSubmitRegistration}
+      displaySignInLink
       displaySignUpLink={false}
+      changeToSignUpForm={clickSignIn}
     />
   );
 };

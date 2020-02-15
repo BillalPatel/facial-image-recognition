@@ -60,7 +60,8 @@ const SignInForm = (props) => {
       clickButton={onSubmitSignIn}
       showSignUpLink={false}
       displaySignUpLink
-      submitSignUp={clickSignUp}
+      displaySignInLink={false}
+      changeToSignUpForm={clickSignUp}
     />
   );
 };
