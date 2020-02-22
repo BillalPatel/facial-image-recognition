@@ -34,7 +34,7 @@ const RegisterForm = (props) => {
       })
     })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           setUserName(name);
           onRouteChange('landing');
         }
