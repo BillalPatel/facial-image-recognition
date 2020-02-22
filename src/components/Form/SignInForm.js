@@ -26,8 +26,8 @@ const SignInForm = (props) => {
       });
   };
 
-  const onSubmitSignIn = () => {
-    fetch('http://localhost:5000/signin', {
+  const onSubmitSignIn = async () => {
+    await fetch('http://localhost:5000/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -42,7 +42,7 @@ const SignInForm = (props) => {
         }
       })
       .catch((err) => console.log(err));
-    setName(signInEmail);
+    await setName(signInEmail);
   };
 
   const clickSignUp = () => {
