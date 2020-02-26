@@ -36,7 +36,12 @@ const Form = (props) => {
               id="email-address"
               onChange={emailChange}
             />
-            <p className="error">Invalid password entered</p>
+            <p
+              className="error"
+              display={false}
+            >
+              Invalid password entered
+            </p>
           </div>
           <div className="mv3">
             <div className="mt3">
@@ -48,7 +53,12 @@ const Form = (props) => {
                 id="password"
                 onChange={passwordChange}
               />
-              <p className="error">Invalid password entered</p>
+              <p
+                className="error"
+                display={false}
+              >
+                Invalid password entered
+              </p>
             </div>
             { confirmPassword
               && (
