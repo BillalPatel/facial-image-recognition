@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../containers/App';
+
 const Form = (props) => {
   const {
     formName, displayNameField, nameChange, emailChange,
@@ -34,6 +36,7 @@ const Form = (props) => {
               id="email-address"
               onChange={emailChange}
             />
+            <p className="error">Invalid password entered</p>
           </div>
           <div className="mv3">
             <div className="mt3">
@@ -45,6 +48,7 @@ const Form = (props) => {
                 id="password"
                 onChange={passwordChange}
               />
+              <p className="error">Invalid password entered</p>
             </div>
             { confirmPassword
               && (
