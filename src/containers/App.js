@@ -28,7 +28,11 @@ const App = () => {
         className="particles"
         params={particlesParameters}
       />
-      <Navigation onRouteChange={onRouteChange} signedIn={signedIn} name={userName} />
+      <Navigation 
+        onRouteChange={onRouteChange}
+        signedIn={signedIn}
+        name={userName} 
+      />
       { route === 'landing'
         ? (
           <ImageLinkInput />
